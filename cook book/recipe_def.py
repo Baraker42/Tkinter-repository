@@ -1,4 +1,4 @@
-#mělo by být hotové, jen třeba opět vyřešit vyskakovací okna a jejich případné zavírání
+
 # po uložení receptu třeba přidat možnost návratu na původní okno (případně ho nezavírat a při uložení zavřít toto)
 from tkinter import *
 import json
