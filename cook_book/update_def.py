@@ -1,4 +1,5 @@
 from tkinter import *
+from tkinter import messagebox
 import json
 
 #spustí se v případě že ještě nexistuje soubor s recepty
@@ -278,21 +279,25 @@ def recipe_update(recepies):
 
     #funkce na smazání zvolenéh oreceptu (nevadilo by vytvořit potvrzovací okno, které se zeptá, zda se chce recept skutečně vymazat)
     def delete_recept(i):
-        
-        #vytvoří nový seznam, do kterého nevloží položku které se to týká
-        new_recepies={}
-        for recipe in recepies:
-            if recipe != i:
-                rewrite=recepies[recipe]
-                new_recepies[recipe]=rewrite
+        asking=messagebox.askquestion("Smazat recept","Vážně chcete tento recetpt vymazat?")
+        print(asking)
+        if asking == "yes":
+            #vytvoří nový seznam, do kterého nevloží položku které se to týká
+            new_recepies={}
+            for recipe in recepies:
+                if recipe != i:
+                    rewrite=recepies[recipe]
+                    new_recepies[recipe]=rewrite
 
-        #uloží nový seznam receptů
-        with open ("././/recepty.json", "w") as file:
-            json.dump(new_recepies, file)
+            #uloží nový seznam receptů
+            with open ("././/recepty.json", "w") as file:
+                json.dump(new_recepies, file)
 
-        root1.destroy()
+            root1.destroy()
         
-        recipe_update(new_recepies)
+            recipe_update(new_recepies)
+        else:
+            pass
 
         
 
