@@ -277,10 +277,10 @@ def recipe_update(recepies):
 
         root2.mainloop()
 
-    #funkce na smazání zvolenéh oreceptu (nevadilo by vytvořit potvrzovací okno, které se zeptá, zda se chce recept skutečně vymazat)
+    #funkce na smazání zvoleného receptu
     def delete_recept(i):
-        asking=messagebox.askquestion("Smazat recept","Vážně chcete tento recetpt vymazat?")
-        print(asking)
+        #ujistí se zda uživatel chce skutečně recept vymazat
+        asking=messagebox.askquestion("Smazat recept",f"Vážně chcete recept {i} vymazat?")
         if asking == "yes":
             #vytvoří nový seznam, do kterého nevloží položku které se to týká
             new_recepies={}
