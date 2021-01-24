@@ -3,6 +3,7 @@ from tkinter import *
 from update_def import *
 from recipe_def import new_recipe
 from ingrediences_def import ingredience_update
+from cooking_def import cook_show
 
 #spustí funkci s tvorbou receptu
 def recipe_start():
@@ -30,13 +31,15 @@ def ingredience_interface():
 
 
 
+
+
 root =Tk()
 root.title("Receptar")
 root.iconbitmap("cook.ico")
 
 #vytvoření nových štítků a tlačítek
 entry=Label(root,text="Vítejte v receptáři! Co si přejete dělat?")
-cook=Button(root, text="Pojďme vařit!")
+cook=Button(root, text="Pojďme vařit!", command=cook_show)
 recipe=Button(root, text="Zadat recept",command=recipe_start)
 update=Button(root, text="Upravit recept",command=load_file)
 ingrediences=Button(root, text="Doplnit suroviny",command=ingredience_interface)

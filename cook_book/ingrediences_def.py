@@ -39,10 +39,16 @@ def ingredience_update():
         new_ingredience_label=Label(root, text=ingredience_e)
         new_quantity_label=Label(root, text=quantity_e)
         new_unit_label=Label(root, text=unit_e)
+        
 
         new_ingredience_label.grid(row=counter,column=0)
         new_quantity_label.grid(row=counter,column=2)
         new_unit_label.grid(row=counter,column=4)
+
+        change_button=Button(root, text="Upravit",command = lambda ingredience_e = ingredience_e: ingredience_edit(ingredience_e) )
+        del_button=Button(root, text ="X", command = lambda ingredience_e = ingredience_e: ingredience_delete(ingredience_e))
+        change_button.grid(row=counter, column=5)
+        del_button.grid(row=counter, column=6)
 
         counter=counter+1
 
@@ -120,7 +126,7 @@ def ingredience_update():
         root.iconbitmap("cook.ico")
         for i in ingrediences:
             if i["surovina"]==ingredience_1:
-                print("tohle chci",i)
+                
                 material=i
         
 
