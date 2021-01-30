@@ -1,3 +1,4 @@
+#jak recepty tak ingredience nechat vypisovat jen do určitého počtu řádků.
 from tkinter import *
 from tkinter import messagebox
 import json

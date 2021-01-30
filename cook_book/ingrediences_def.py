@@ -4,9 +4,8 @@ import json
 
 #last edit 19.1.2021: v základu funguje jak má. Jdou vkládat suroviny, jdou mazat suroviny, jdou upravovat suroviny
 #nicméně mi to přijde celkem neelegatní, takže budu později ladit a přidávat funkce
-#přidat možnost vymazat a upravit surovinu hned po přidání
-#zatím funguje pěkně - třeba přidat funkce úpravy stavu suroviny(to jest přejmenování, aktualizace současného počtu) případně celkové vymazání (myslet na chyby ne jako korpo)
-#otázka jestli nebude jednodušší a praktičtější rozdělit na dvě funkce, přičemž jedna se spustí, když není nic vložené a druhá v příapdě že jsou už nějaké suroviny v souboru(asi ne)
+
+
 def ingredience_update():
     # slouží k uložení nového záznamu surovin. Řídí se tím, jestli už jsou nějaké suroviny v seznamu či nikoliv
     def save_stock(ingrediences,ingredience_e, quantity_e, unit_e, counter):
@@ -78,7 +77,7 @@ def ingredience_update():
     root =Tk()
     root.title("Receptar")
     root.iconbitmap("cook.ico")
-    #tato část skriptu zjsití, jestli už nějaký soubor se surovinami existuje a pokud ano, tak ho otevře, pokud ne 
+    #tato část skriptu zjistí, jestli už nějaký soubor se surovinami existuje a pokud ano, tak ho otevře, pokud ne 
     #vytvoří nový list
     try:
         with open ("suroviny.json") as f:
@@ -101,7 +100,6 @@ def ingredience_update():
         #funkce pro úpravu informací o surovinách
     def ingredience_edit(ingredience_1):
         #uloží změny v konkrétní surovině chci vyrobit i jednodušší variantu, kde se pouze napíše číslo a jedním tlačítkem potvrdí
-        #třeba zařídit, aby po uložení změn došlo k uzavření všech oken a jejich opětovné načtení, jako jsem to už několikrát dělal
         def save_changes(ingredience_1, material_entry, mass_entry, unit_entry):
 
                 update_info={"surovina":material_entry, "množství":mass_entry, "jednotka":unit_entry}

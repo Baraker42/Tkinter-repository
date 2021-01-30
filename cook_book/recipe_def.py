@@ -1,5 +1,6 @@
 
-# po uložení receptu třeba přidat možnost návratu na původní okno (případně ho nezavírat a při uložení zavřít toto)
+#zkusit vymyslet, převodní systém na jednotky. Asi by si uživatel musel převody zjistit a zapsat sám, ale už by nemusel
+#znovu věci přepočítávat. Pravděpodobně to vytvořit jako novou funkci s vlastním tlačítkem
 from tkinter import *
 import json
 def new_recipe():
