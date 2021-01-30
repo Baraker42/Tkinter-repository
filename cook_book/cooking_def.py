@@ -140,7 +140,8 @@ def cook_show():
                         miss_mass.append(miss_mass_var)
 
                         not_enough=+1
-                            
+                        
+                        #test
                         #nové rozhraní
                         not_enough_popup=Tk()
                         not_enough_popup.title("Receptář")
