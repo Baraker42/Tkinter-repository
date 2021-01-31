@@ -1,6 +1,6 @@
 from random import randrange
 from tkinter import *
-#from epidemie_prubeh2 import zalozeni
+
 
 from PIL import ImageTk, Image
 #založení nového setu obyvatel
