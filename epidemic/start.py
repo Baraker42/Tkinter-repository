@@ -3,7 +3,7 @@ from Game import faze_2
 
 root = Tk()
 root.title("Epidemic The Game")
-root.iconbitmap("c:/Users/PAN Hakl/Desktop/Programování/vir.ico")
+root.iconbitmap("vir.ico")
 #vykreslí konzole na napsání jména hráče a jména viru
 e=Entry(root, width = 30, borderwidth=5)
 vir=Entry(root,width = 30, borderwidth=5)
