@@ -11,7 +11,7 @@ def new_recipe():
 
     global row_counter
     row_counter=2
-    print(row_counter)
+    
     
     #připraví lisk do kterého bude ukládat soubory surovin
     whole=[]

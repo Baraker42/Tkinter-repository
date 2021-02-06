@@ -7,7 +7,7 @@ from cooking_def import cook_show
 
 #spustí funkci s tvorbou receptu
 def recipe_start():
-    #root.destroy()
+    
     new_recipe()
 
     #spustí funkci, která zkotroluje zda existuje soubor s recepty, pokud ne nepokračuje dál
@@ -17,7 +17,7 @@ def load_file ():
         with open ("recepty.json") as f:
             recepies = json.load(f)
         
-        #root.destroy()
+        
         recipe_update(recepies)
         
 
@@ -26,7 +26,7 @@ def load_file ():
 
 #spustí funkci, která umožňuje přidání a úpravu surovin
 def ingredience_interface():
-    #root.destroy()
+    
     ingredience_update()
 
 
