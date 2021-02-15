@@ -8,7 +8,6 @@ def cooking(i):
         #musím zvolit index podle hledaného objektu nikoliv pomocí čísla. Když to necham jak to je, tak z toho bude string
         #pravděpodobně jsem to vědel a zapomněl, protože jsem s tím už dlouho nepracoval
         recipe=recipes[i]
-        print(ingrediences)
         not_enough=0
         miss=[]
         miss_mass=[]
@@ -51,16 +50,16 @@ def cooking(i):
                     
             
         if not_enough >=0:  
-            #nové rozhraní
+            #nové rozhraní pro vypsání surovin, kterých je nedostatek nebo nejsou evidované
             not_enough_popup=Tk()
             not_enough_popup.title("Receptář")
             not_enough_popup.iconbitmap("cook.ico")
 
             #štítky
-            not_enough_label=Label(not_enough_popup,text="Nemáš dostatek následujících surovin")
+            not_enough_label=Label(not_enough_popup,text="Nemáš dostatek následujících surovin:",font=("Helvetica",10,"bold"))
             not_enough_label.grid(row=0,column=0,columnspan=2)
             counter=1
-            #vypíše suroviny, který je nedostatečné množství ve spíži
+            #vypíše suroviny, kterých je nedostatečné množství ve spíži
             for missing in miss:
                 missing_mass=miss_mass[counter-1]
 
@@ -71,11 +70,12 @@ def cooking(i):
                 missing_mass_label.grid(row=counter,column=1)
 
                 counter+=1
-            counter+=1
-            not_in_stock_label=Label(not_enough_popup, text="Tyto suroviny nemáš zaevidované")
+            
+            #vypíš suroviny, které nejsou evidované
+            not_in_stock_label=Label(not_enough_popup, text="Tyto suroviny nemáš zaevidované:",anchor="center",font=("Helvetica",10,"bold"))
             not_in_stock_label.grid(row=counter,column=0)
-            counter+=2
-            print("v tuto chvíli not stock",not_in_stock)
+            counter+=1
+            
             for not_stocked in not_in_stock:
                 not_stocked_label=Label(not_enough_popup,text=not_stocked)
                 not_stocked_label.grid(row=counter)
@@ -89,7 +89,7 @@ def cook_show():
         global ingrediences
         with open ("suroviny.json") as f:
             ingrediences = json.load(f)
-            print(ingrediences[0])
+            fail=(ingrediences[0])
     except IndexError:
         no_ingredience_root=Tk()
         no_ingredience_root.title("Receptář")
@@ -100,12 +100,13 @@ def cook_show():
         no_ingredience_button.grid(row=1,column=0)
         no_ingredience_root.mainloop()
     global recipes
+    #zjistí zda jsou uložené nějaké recepty a pokud ne, informuje uživatele
     with open ("recepty.json") as e:
         
         recipes = json.load(e)
         
         if len(recipes) ==0:
-            
+            #rozhraní, které informuje uživatele, že není v tuto chvíli žádný recept uložený
             no_recipe_root=Tk()
             no_recipe_root.title("Receptař")
             no_recipe_root.iconbitmap("cook.ico")
@@ -115,12 +116,13 @@ def cook_show():
             no_recipe_button.grid(row=1,column=0)
             no_recipe_root.mainloop()
         else:
-            
+            #v případě, že je k dispozici jak dokument s recepty i se surovinami, spustí rozhrnaí por vaření
             root=Tk()
             root.title("Receptář")
             root.iconbitmap("cook.ico")
 
             counter=0
+            #vypíše recepty, které jsou k dispozici
             for i in recipes:
                 recipe_label=Label(root, text=i)
                 recipe_label.grid(row=counter,column=0)
@@ -128,8 +130,6 @@ def cook_show():
                 cook_button=Button(root, text="Vařit!", command=lambda i=i:cooking(i))
                 cook_button.grid(row=counter,column=1)
                 counter=+1
-
-
 
             root.mainloop()
             

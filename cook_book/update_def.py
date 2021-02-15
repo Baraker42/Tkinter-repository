@@ -81,16 +81,6 @@ def recipe_update(recepies):
 
         root.mainloop()
 
-
-    #uloží změnu názvu (bohužel v současné době musí přepsat celý soubor a znovu uložit)
-    
-
-        #slouží ke změně názvu receptu 
-    
- 
-        
-        #uloží přidanou surovinu
-        #přepsat aby se vypsalo všechno znovu
     
     #funkce, která vypíše název receptu a všechny suroviny s možností úpravy
     def print_recept(i):
@@ -246,7 +236,6 @@ def recipe_update(recepies):
         chosen=recepies[i]
 
         for i in chosen:
-            print (i["surovina"])
             chosen_ingr=i["surovina"]
             chosen_quant=i["množství"]
             chosen_unit=i["jednotka"]

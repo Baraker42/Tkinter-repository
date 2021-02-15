@@ -1,5 +1,4 @@
 from tkinter import *
-#import cooking_def
 from update_def import *
 from recipe_def import new_recipe
 from ingrediences_def import ingredience_update
@@ -10,7 +9,7 @@ def recipe_start():
     
     new_recipe()
 
-    #spustí funkci, která zkotroluje zda existuje soubor s recepty, pokud ne nepokračuje dál
+    #spustí funkci, která zkotroluje zda existuje soubor s recepty, pokud ne, nepokračuje dál
 def load_file ():
     
     try:
