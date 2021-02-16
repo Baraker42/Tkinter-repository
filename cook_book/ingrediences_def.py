@@ -86,6 +86,7 @@ def ingredience_update():
 
     except FileNotFoundError:
         ingrediences=[]
+        unlock=False
         pass
 
 

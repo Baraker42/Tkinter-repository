@@ -29,9 +29,6 @@ def ingredience_interface():
     ingredience_update()
 
 
-
-
-
 root =Tk()
 root.title("Receptar")
 root.iconbitmap("cook.ico")

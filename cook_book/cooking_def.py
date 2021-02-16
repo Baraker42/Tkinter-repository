@@ -90,7 +90,7 @@ def cook_show():
         with open ("suroviny.json") as f:
             ingrediences = json.load(f)
             fail=(ingrediences[0])
-    except IndexError:
+    except:
         no_ingredience_root=Tk()
         no_ingredience_root.title("Receptář")
         no_ingredience_root.iconbitmap("cook.ico")
@@ -101,37 +101,49 @@ def cook_show():
         no_ingredience_root.mainloop()
     global recipes
     #zjistí zda jsou uložené nějaké recepty a pokud ne, informuje uživatele
-    with open ("recepty.json") as e:
-        
-        recipes = json.load(e)
-        
-        if len(recipes) ==0:
-            #rozhraní, které informuje uživatele, že není v tuto chvíli žádný recept uložený
-            no_recipe_root=Tk()
-            no_recipe_root.title("Receptař")
-            no_recipe_root.iconbitmap("cook.ico")
-            no_recipe_label=Label(no_recipe_root,text="Nemáš žádný recept, podle kterého by šlo vařit")
-            no_recipe_button=Button(no_recipe_root, text="Zavřít",command=no_recipe_root.destroy)        
-            no_recipe_label.grid(row=0,column=0)
-            no_recipe_button.grid(row=1,column=0)
-            no_recipe_root.mainloop()
-        else:
-            #v případě, že je k dispozici jak dokument s recepty i se surovinami, spustí rozhrnaí por vaření
-            root=Tk()
-            root.title("Receptář")
-            root.iconbitmap("cook.ico")
+    try:
+        with open ("recepty.json") as e:
+            
+            recipes = json.load(e)
+            
+            if len(recipes) ==0:
+                #rozhraní, které informuje uživatele, že není v tuto chvíli žádný recept uložený, ale soubor s recepty je vytvořený
+                no_recipe_root=Tk()
+                no_recipe_root.title("Receptař")
+                no_recipe_root.iconbitmap("cook.ico")
+                no_recipe_label=Label(no_recipe_root,text="Nemáš žádný recept, podle kterého by šlo vařit")
+                no_recipe_button=Button(no_recipe_root, text="Zavřít",command=no_recipe_root.destroy)        
+                no_recipe_label.grid(row=0,column=0)
+                no_recipe_button.grid(row=1,column=0)
+                no_recipe_root.mainloop()
+            else:
+                #v případě, že je k dispozici jak dokument s recepty i se surovinami, spustí rozhrnaí por vaření
+                root=Tk()
+                root.title("Receptář")
+                root.iconbitmap("cook.ico")
 
-            counter=0
-            #vypíše recepty, které jsou k dispozici
-            for i in recipes:
-                recipe_label=Label(root, text=i)
-                recipe_label.grid(row=counter,column=0)
+                counter=0
+                #vypíše recepty, které jsou k dispozici
+                for i in recipes:
+                    recipe_label=Label(root, text=i)
+                    recipe_label.grid(row=counter,column=0)
 
-                cook_button=Button(root, text="Vařit!", command=lambda i=i:cooking(i))
-                cook_button.grid(row=counter,column=1)
-                counter=+1
+                    cook_button=Button(root, text="Vařit!", command=lambda i=i:cooking(i))
+                    cook_button.grid(row=counter,column=1)
+                    counter=+1
+                root.mainloop()
+    except:
+        no_recipe_root=Tk()
+        no_recipe_root.title("Receptař")
+        no_recipe_root.iconbitmap("cook.ico")
+        no_recipe_label=Label(no_recipe_root,text="Zatím nemáš žádný recept, podle kterého by šlo vařit")
+        no_recipe_button=Button(no_recipe_root, text="Zavřít",command=no_recipe_root.destroy)                    
+        no_recipe_label.grid(row=0,column=0)
+        no_recipe_button.grid(row=1,column=0)
+        no_recipe_root.mainloop()
 
-            root.mainloop()
+
+            
             
 
 
