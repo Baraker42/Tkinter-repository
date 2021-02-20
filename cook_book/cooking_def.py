@@ -2,17 +2,33 @@
 from tkinter import*
 import json
 from tkinter import messagebox
+from update_def import no_recipe
 
 #tato část skriptu odečítá suroviny podle receptu a aktualizuje je v původním souboru
-def cooking(i):
+def cooking(ing):
         #musím zvolit index podle hledaného objektu nikoliv pomocí čísla. Když to necham jak to je, tak z toho bude string
         #pravděpodobně jsem to vědel a zapomněl, protože jsem s tím už dlouho nepracoval
-        recipe=recipes[i]
+        recipe=recipes[ing]
+        print(recipe)
         not_enough=0
         miss=[]
         miss_mass=[]
         not_in_stock=[]
+        bag_of_ingrediences=[]
+        number_of_portion=[]
+
+        #oddělí suroviny od počtu porcí
         for i in recipe:
+            
+            if type(i) == dict:
+                
+                bag_of_ingrediences.append(i)
+            else:
+                number_of_portion.append(i)
+                
+        
+        for i in bag_of_ingrediences:
+            
             want_ingredience=i["surovina"]
             
             want_mass=i["množství"]
@@ -47,9 +63,24 @@ def cooking(i):
         if not_enough == 0:        
             with open ("././/suroviny.json", "w") as file:
                     json.dump(ingrediences, file)
-                    
             
-        if not_enough >=0:  
+            #vytvoří nové rozhraní, kde informuje uživatele, že uvařil daný recept a popřeje dobrou chuť
+            enjoy_popup=Tk()
+            enjoy_popup.title("Receptář")
+            enjoy_popup.iconbitmap("cook.ico")
+
+            #štítky
+            enjoy_label=Label(enjoy_popup, text=f"Super! Uvařil jsi {ing}. Dobrou chuť!")
+            enjoy_info_label=Label(enjoy_popup, text="Všechny použité ingredience byly odečteny")
+            enjoy_button=Button(enjoy_popup,text="Zavřít", command=enjoy_popup.destroy)
+
+            enjoy_label.grid(row=1,column=0)
+            enjoy_info_label.grid(row=2,column=0)
+            enjoy_button.grid(row=3,column=0)
+
+            enjoy_popup.mainloop()        
+            
+        if not_enough >0:  
             #nové rozhraní pro vypsání surovin, kterých je nedostatek nebo nejsou evidované
             not_enough_popup=Tk()
             not_enough_popup.title("Receptář")
@@ -58,6 +89,10 @@ def cooking(i):
             #štítky
             not_enough_label=Label(not_enough_popup,text="Nemáš dostatek následujících surovin:",font=("Helvetica",10,"bold"))
             not_enough_label.grid(row=0,column=0,columnspan=2)
+
+            not_enough_button=Button(not_enough_popup, text="Zavřít",command=not_enough_popup.destroy)
+
+
             counter=1
             #vypíše suroviny, kterých je nedostatečné množství ve spíži
             for missing in miss:
@@ -80,6 +115,7 @@ def cooking(i):
                 not_stocked_label=Label(not_enough_popup,text=not_stocked)
                 not_stocked_label.grid(row=counter)
                 counter+=1
+            not_enough_button.grid(row=counter)
             not_enough_popup.mainloop()
              
 
@@ -108,14 +144,7 @@ def cook_show():
             
             if len(recipes) ==0:
                 #rozhraní, které informuje uživatele, že není v tuto chvíli žádný recept uložený, ale soubor s recepty je vytvořený
-                no_recipe_root=Tk()
-                no_recipe_root.title("Receptař")
-                no_recipe_root.iconbitmap("cook.ico")
-                no_recipe_label=Label(no_recipe_root,text="Nemáš žádný recept, podle kterého by šlo vařit")
-                no_recipe_button=Button(no_recipe_root, text="Zavřít",command=no_recipe_root.destroy)        
-                no_recipe_label.grid(row=0,column=0)
-                no_recipe_button.grid(row=1,column=0)
-                no_recipe_root.mainloop()
+                no_recipe()
             else:
                 #v případě, že je k dispozici jak dokument s recepty i se surovinami, spustí rozhrnaí por vaření
                 root=Tk()
@@ -133,14 +162,7 @@ def cook_show():
                     counter=+1
                 root.mainloop()
     except:
-        no_recipe_root=Tk()
-        no_recipe_root.title("Receptař")
-        no_recipe_root.iconbitmap("cook.ico")
-        no_recipe_label=Label(no_recipe_root,text="Zatím nemáš žádný recept, podle kterého by šlo vařit")
-        no_recipe_button=Button(no_recipe_root, text="Zavřít",command=no_recipe_root.destroy)                    
-        no_recipe_label.grid(row=0,column=0)
-        no_recipe_button.grid(row=1,column=0)
-        no_recipe_root.mainloop()
+        no_recipe()
 
 
             

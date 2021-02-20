@@ -80,23 +80,25 @@ def new_recipe():
         new_ingredience.grid(row=(row_counter+1),column=5)
 
         #přidat řádek na uložení receptu
-        save_recipe=Button(root,text="Uložit recept", command=lambda:final(whole,name_entry.get()))
+        save_recipe=Button(root,text="Uložit recept", command=lambda:final(whole,name_entry.get(), portion_entry.get()))
         save_recipe.grid(row=(row_counter+2),column=5)
     
     #ukončení tvorby nového receptu - uložení do souboru json
-    def final(whole,e_name):
-       
+    def final(whole,e_name,portion):
+        whole.append(portion)
         #v případě že už nějaký soubor json vytvořený je
         try:
             with open ("recepty.json") as f:
                 data = json.load(f)
             finalization=data
             finalization[e_name]=whole
+            print(finalization)
 
         #v případě že žádný soubor vytvořený není, tak ho vytvoří
         except FileNotFoundError:
             finalization={}
             finalization[e_name]=whole
+        
 
         #uloží vytvořený recept
         with open ("././/recepty.json", "w") as file:
@@ -107,7 +109,11 @@ def new_recipe():
     #název receptu
     name=Label(root, text="Název receptu")
     name_entry=Entry(root,width = 20, borderwidth=5)
-    
+
+    #počet porcí
+    portions=Label(root, text="Počet porcí")
+    portion_entry=Entry(root, width =5, borderwidth=5)
+
     #suroviny
     global ingredience
     global ingredience_entry
@@ -133,12 +139,15 @@ def new_recipe():
 
     #uložit recept
     global save_recipe
-    save_recipe=Button(root,text="Uložit recept", command=lambda:final(whole,name_entry.get()))
+    save_recipe=Button(root,text="Uložit recept", command=lambda:final(whole,name_entry.get(),portion_entry.get()))
 
     #vykreslení tlačítek apod
     #1.řádek
     name.grid(row=1,column=2)
     name_entry.grid(row=1,column=3)
+
+    portions.grid(row=1, column=4)
+    portion_entry.grid(row=1, column=5)
 
     #2řádek
     ingredience.grid(row=2,column=0)

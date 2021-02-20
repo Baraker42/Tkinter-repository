@@ -1,4 +1,6 @@
 #jak recepty tak ingredience nechat vypisovat jen do určitého počtu řádků.
+ #třeba tento modul rozebrat na menší části, nedá se v něm dobře orientovat
+ #přidávání surovin do již existujícího receptu
 from tkinter import *
 from tkinter import messagebox
 import json
@@ -84,7 +86,7 @@ def recipe_update(recepies):
     
     #funkce, která vypíše název receptu a všechny suroviny s možností úpravy
     def print_recept(i):
-
+        #slouží k přejmenování
         def name_mod(name):
             root =Tk()
             root.title("Receptar")
@@ -132,7 +134,7 @@ def recipe_update(recepies):
 
             save_button=Button(root, text="Uložit změnu", command=lambda:save_name(new_name_entry.get(),name))
             save_button.grid(row=2,column=1)
-            print(name)
+            
 
             root.mainloop()
 
@@ -218,15 +220,15 @@ def recipe_update(recepies):
             
             add_ingredience_button=Button(root2, text="Přidat další",command=lambda:add_ingredience(chosen,counter))
             add_ingredience_button.grid(row=counter,column=6)
-
+        #součástí funkce print recept
         root2 =Tk()
         root2.title("Receptar")
         root2.iconbitmap("cook.ico")
         name=i
-        print(type(i),"vypíše typ i")
+        
 
         #vypíše název receptu
-        chosen_label=Label(root2, text=i)
+        chosen_label=Label(root2, text=f"Název receptu: {i}", font=("Helvetica",10,"bold"))
         chosen_label.grid(row=0,column=0)
         chosen_mod_button=Button(root2, text="Upravit",command=lambda:name_mod(name))
         chosen_mod_button.grid(row=0,column=6)
